@@ -1,49 +1,44 @@
 function highlight(table) {
-//const table = document.body.querySelector('table');
- 
-//console.log( table.rows[0].cells[0].innerHTML );
- 
-let colStatus = 0;
+  
+ let colStatus = 0;
  let colGender =0;
  let colAge = 0;
-for (let i=0; i< table.rows[0].cells.length; i++) {
- switch(table.rows[0].cells[i].textContent) {
-  case 'Status':  
-    colStatus = i;
-    break;
-  case 'Gender':  
-    colGender = i;
-    break;  
-  case 'Age':  
-    colAge = i;
+ for (let i=0; i< table.rows[0].cells.length; i++) {
+  switch(table.rows[0].cells[i].textContent) {
+   case 'Status':  
+     colStatus = i;
+     break;
+   case 'Gender':  
+     colGender = i;
+     break;  
+   case 'Age':  
+     colAge = i;
    };
- 
-}
- // console.log(colStatus,colGender,colAge);
-for (let i=1; i< table.rows.length; i++ ){
- //console.log(table.rows[i].cells[colStatus].dataset.available);
-  
- switch (table.rows[i].cells[colStatus].dataset.available ) {
+ }
+   
+ for (let i=1; i< table.rows.length; i++ ){
+   
+  let row = table.rows[i]; // new
+   
+  switch (row.cells[colStatus].dataset.available ) {
    case 'true': 
-     table.rows[i].className ='available' ;
+     row.classList.add('available')  ;
      break;
    case 'false': 
-     table.rows[i].className ='unavailable' ;
+     row.classList.add('unavailable')  ;
      break;
    case undefined :
-     table.rows[i].style.hidden = 'true' ;
- };
+     row.hidden = 'true' ;
+  };
   
-if (table.rows[i].cells[colGender].textContent ==='m') {
-  table.rows[i].className=  'male'; 
-} else if (table.rows[i].cells[colGender].textContent ==='f') {
-  table.rows[i].className ='female';
-} ;
-
-//console.log(parseInt(table.rows[i].cells[colAge].textContent,10));  
- if ((parseInt(table.rows[i].cells[colAge].textContent,10) || 0) < 18) {
-  table.rows[i].style="text-decoration: line-through"; 
-}
- //table.rows[i].cells[colStatus].style.backgroundColor = 'red';
-}
+  if (row.cells[colGender].textContent ==='m') {
+    row.classList.add('male'); 
+  } else if (row.cells[colGender].textContent ==='f') {
+    row.classList.add('female');
+  } ;
+ 
+  if ((parseInt(row.cells[colAge].textContent,10) || 0) < 18) {
+    row.style.textDecoration="line-through"; 
+  };
+ };
 } 
